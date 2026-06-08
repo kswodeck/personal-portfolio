@@ -4,7 +4,7 @@ import { resolve } from 'path';
 
 export default defineConfig({
   plugins: [vue()],
-  base: '/kswodeck/vue/',
+  base: '/vue/',
   build: {
     outDir: resolve(__dirname, '../../dist/kswodeck/vue'),
     emptyOutDir: true,

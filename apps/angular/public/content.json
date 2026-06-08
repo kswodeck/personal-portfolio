@@ -2,7 +2,7 @@
   "meta": {
     "siteTitle": "Kris Swodeck – Front-End / Software Engineer",
     "description": "Portfolio of Kris Swodeck, a Front-End / Software Engineer with 7+ years building and testing production web applications. Specializing in JavaScript, TypeScript, and the Vue / Nuxt ecosystem with deep QA and test-automation experience.",
-    "basePath": "/kswodeck/",
+    "basePath": "/",
     "frameworks": ["vanilla", "react", "vue", "angular"],
     "defaultFramework": "vanilla",
     "frameworkLabels": {
@@ -13,10 +13,10 @@
     },
     "routing": "path",
     "frameworkPaths": {
-      "vanilla": "/kswodeck/",
-      "react": "/kswodeck/react/",
-      "vue": "/kswodeck/vue/",
-      "angular": "/kswodeck/angular/"
+      "vanilla": "/",
+      "react": "/react/",
+      "vue": "/vue/",
+      "angular": "/angular/"
     },
     "showPhonePublicly": false
   },
@@ -34,12 +34,68 @@
   },
   "summary": "Front-End / Software Engineer with 7+ years building and testing production web applications across the full software development lifecycle. Specialized in JavaScript, TypeScript, HTML5, CSS3, and the Vue / Nuxt.js ecosystem, with a solid Node.js foundation. Brings uncommon depth in software quality and test automation (Selenium, Mocha, Chai), applying a QA-driven engineering approach that produces reliable, well-tested, maintainable code. B.S. in Computer Science with a Business Administration minor.",
   "skills": [
-    { "category": "Languages", "items": ["JavaScript", "TypeScript", "HTML5", "CSS3", "SQL"] },
-    { "category": "Frameworks & Libraries", "items": ["Vue", "Nuxt.js", "Node.js", "Express.js", "jQuery", "AJAX", "JSON/XHTML", "React", "SASS"] },
-    { "category": "Testing & QA", "items": ["Test Automation", "Selenium", "Mocha", "Chai", "BrowserStack", "Test Planning", "Test Case Design", "UI Automation", "Defect Tracking"] },
+    {
+      "category": "Languages",
+      "items": ["JavaScript", "TypeScript", "HTML5", "CSS3", "SQL"]
+    },
+    {
+      "category": "Frameworks & Libraries",
+      "items": [
+        "Vue",
+        "Nuxt.js",
+        "Node.js",
+        "Express.js",
+        "jQuery",
+        "AJAX",
+        "JSON/XHTML",
+        "React",
+        "SASS"
+      ]
+    },
+    {
+      "category": "Testing & QA",
+      "items": [
+        "Test Automation",
+        "Selenium",
+        "Mocha",
+        "Chai",
+        "BrowserStack",
+        "Test Planning",
+        "Test Case Design",
+        "UI Automation",
+        "Defect Tracking"
+      ]
+    },
     { "category": "Databases", "items": ["SQL", "MongoDB"] },
-    { "category": "Tools & Platforms", "items": ["Git", "Bitbucket", "Jira", "Confluence", "VS Code", "Cursor", "WordPress", "Claude Code", "GitHub Actions", "GitHub Copilot"] },
-    { "category": "Concepts & Methodologies", "items": ["AI-Assisted Development", "Responsive Web Design", "REST APIs", "UX/UI Design", "Agile / Scrum", "SDLC", "WCAG Accessibility", "SEO", "Web Analytics"] }
+    {
+      "category": "Tools & Platforms",
+      "items": [
+        "Git",
+        "Bitbucket",
+        "Jira",
+        "Confluence",
+        "VS Code",
+        "Cursor",
+        "WordPress",
+        "Claude Code",
+        "GitHub Actions",
+        "GitHub Copilot"
+      ]
+    },
+    {
+      "category": "Concepts & Methodologies",
+      "items": [
+        "AI-Assisted Development",
+        "Responsive Web Design",
+        "REST APIs",
+        "UX/UI Design",
+        "Agile / Scrum",
+        "SDLC",
+        "WCAG Accessibility",
+        "SEO",
+        "Web Analytics"
+      ]
+    }
   ],
   "experience": [
     {
@@ -118,19 +174,11 @@
     },
     {
       "name": "This Portfolio (Multi-Framework)",
-      "url": "https://swodecksitesolutions.com/kswodeck",
+      "url": "https://kswodeck.swodecksitesolutions.com",
       "date": "2026",
       "bullets": [
         "Single portfolio rendered in four front-end implementations – Vanilla JS/TS, React, Vue, and Angular – each served as its own independently built app at a dedicated URL path (e.g. /kswodeck/angular/).",
         "All four implementations render from a single shared content source, demonstrating cross-framework breadth and a consistent component architecture."
-      ]
-    },
-    {
-      "name": "Swodeck Site Solutions",
-      "url": "https://swodecksitesolutions.com",
-      "date": "2024 – Present",
-      "bullets": [
-        "Designed and developed responsive, user-friendly websites in WordPress, HTML, CSS, and JavaScript for diverse small-business clients, aligning each build with client goals."
       ]
     },
     {

@@ -3,6 +3,11 @@
   "private": true,
   "scripts": {
     "install-all": "npm install --prefix apps/vanilla && npm install --prefix apps/react && npm install --prefix apps/vue && npm install --prefix apps/angular",
-    "build": "node scripts/build-all.mjs"
+    "dev": "npm run dev --prefix apps/vanilla",
+    "build": "node scripts/build-all.mjs",
+    "dev:vanilla": "npm run dev --prefix apps/vanilla",
+    "dev:react": "npm run dev --prefix apps/react",
+    "dev:vue": "npm run dev --prefix apps/vue",
+    "dev:angular": "npm run start --prefix apps/angular"
   }
 }

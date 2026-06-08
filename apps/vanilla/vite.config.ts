@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import { resolve } from 'path';
 
 export default defineConfig({
-  base: '/kswodeck/',
+  base: '/',
   build: {
     outDir: resolve(__dirname, '../../dist/kswodeck'),
     emptyOutDir: true,

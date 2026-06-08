@@ -21,7 +21,7 @@
               "base": "../../dist/kswodeck/angular",
               "browser": ""
             },
-            "baseHref": "/kswodeck/angular/",
+            "baseHref": "/angular/",
             "tsConfig": "tsconfig.app.json",
             "assets": [
               {
