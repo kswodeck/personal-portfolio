@@ -1,0 +1,8 @@
+{
+  "name": "kswodeck-portfolio",
+  "private": true,
+  "scripts": {
+    "install-all": "npm install --prefix apps/vanilla && npm install --prefix apps/react && npm install --prefix apps/vue && npm install --prefix apps/angular",
+    "build": "node scripts/build-all.mjs"
+  }
+}

@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+apps/vanilla/node_modules/
+apps/react/node_modules/
+apps/vue/node_modules/
+apps/angular/node_modules/
+
+# Build output
+dist/
+
+# Vite
+apps/vanilla/.vite/
+apps/react/.vite/
+apps/vue/.vite/
+apps/angular/.vite/
+
+# Angular
+apps/angular/.angular/
+
+# TypeScript build info
+*.tsbuildinfo
+apps/vue/node_modules/.tmp/
+
+# Environment & local config
+.env
+.env.local
+.env.*.local
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/settings.json
+
+# Claude Code project config
+.claude/
