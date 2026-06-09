@@ -1,7 +1,7 @@
 [build]
-  # Install all app dependencies, then build all four apps
   command   = "npm run install-all && npm run build"
   publish   = "dist/kswodeck"
 
 [build.environment]
-  NODE_VERSION = "22"
+  NODE_VERSION     = "22"
+  NPM_FLAGS        = "--prefer-offline"

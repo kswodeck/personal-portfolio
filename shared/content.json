@@ -1,7 +1,7 @@
 {
   "meta": {
-    "siteTitle": "Kris Swodeck – Front-End / Software Engineer",
-    "description": "Portfolio of Kris Swodeck, a Front-End / Software Engineer with 7+ years building and testing production web applications. Specializing in JavaScript, TypeScript, and the Vue / Nuxt ecosystem with deep QA and test-automation experience.",
+    "siteTitle": "Kris Swodeck – Front-End Web Developer / Software Engineer",
+    "description": "Portfolio of Kris Swodeck, a Front-End Web Developer / Software Engineer with 7+ years building and testing production web applications. Specializing in JavaScript, TypeScript, and the Vue / Nuxt ecosystem with deep QA and test-automation experience.",
     "basePath": "/",
     "frameworks": ["vanilla", "react", "vue", "angular"],
     "defaultFramework": "vanilla",
@@ -22,9 +22,9 @@
   },
   "profile": {
     "name": "Kris Swodeck",
-    "title": "Front-End / Software Engineer",
+    "title": "Front-End Web Developer / Software Engineer",
     "tagline": "JavaScript • TypeScript • Vue / Nuxt • QA-driven engineering",
-    "location": "Dallas–Fort Worth, TX",
+    "location": "Dallas–Fort Worth, TX or Remote",
     "email": "kmswodeck@gmail.com",
     "phone": "(909) 631-3783",
     "links": {
@@ -32,7 +32,7 @@
       "github": "https://github.com/kswodeck"
     }
   },
-  "summary": "Front-End / Software Engineer with 7+ years building and testing production web applications across the full software development lifecycle. Specialized in JavaScript, TypeScript, HTML5, CSS3, and the Vue / Nuxt.js ecosystem, with a solid Node.js foundation. Brings uncommon depth in software quality and test automation (Selenium, Mocha, Chai), applying a QA-driven engineering approach that produces reliable, well-tested, maintainable code. B.S. in Computer Science with a Business Administration minor.",
+  "summary": "Front-End Web Developer / Software Engineer with 7+ years building and testing production web applications across the full software development lifecycle. Specialized in JavaScript, TypeScript, HTML5, CSS3, and the Vue / Nuxt.js ecosystem, with a solid Node.js foundation. Brings uncommon depth in software quality and test automation (Selenium, Mocha, Chai), applying a QA-driven engineering approach that produces reliable, well-tested, maintainable code. B.S. in Computer Science with a Business Administration minor.",
   "skills": [
     {
       "category": "Languages",
@@ -174,7 +174,7 @@
     },
     {
       "name": "This Portfolio (Multi-Framework)",
-      "url": "https://kswodeck.swodecksitesolutions.com",
+      "url": "",
       "date": "2026",
       "bullets": [
         "Single portfolio rendered in four front-end implementations – Vanilla JS/TS, React, Vue, and Angular – each served as its own independently built app at a dedicated URL path (e.g. /kswodeck/angular/).",
