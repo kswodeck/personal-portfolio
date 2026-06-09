@@ -37,7 +37,7 @@ function App() {
 
   // useEffect fires after paint — DOM is ready, safe to observe elements
   useEffect(() => {
-    if (content) initAnimations();
+    if (content) initAnimations(content.profile.taglines);
   }, [content]);
 
   if (error) {

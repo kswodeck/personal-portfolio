@@ -2,12 +2,13 @@
 // Builds all four apps in parallel and assembles dist/kswodeck/.
 // Run from the repo root: node scripts/build-all.mjs
 import { spawn } from 'child_process';
-import { cpSync, mkdirSync } from 'fs';
+import { cpSync, mkdirSync, existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const shared = join(root, 'shared/content.json');
+const resume = join(root, 'shared/Kris-Swodeck-Resume.pdf');
 
 // Stream each process's output prefixed with the framework name.
 function run(label, cmd, args, cwd) {
@@ -28,6 +29,7 @@ function run(label, cmd, args, cwd) {
 console.log('\n▶ Syncing shared/content.json → apps/*/public/content.json');
 for (const app of ['vanilla', 'react', 'vue', 'angular']) {
   cpSync(shared, join(root, `apps/${app}/public/content.json`));
+  if (existsSync(resume)) cpSync(resume, join(root, `apps/${app}/public/Kris-Swodeck-Resume.pdf`));
 }
 
 // 1. Build all four frameworks in parallel — they write to separate output
@@ -45,6 +47,7 @@ await Promise.all([
 const distRoot = join(root, 'dist/kswodeck');
 mkdirSync(distRoot, { recursive: true });
 cpSync(shared, join(distRoot, 'content.json'));
+if (existsSync(resume)) cpSync(resume, join(distRoot, 'Kris-Swodeck-Resume.pdf'));
 
 console.log('\n✅  dist/kswodeck/ is ready for deployment.');
 console.log('    kswodeck.swodecksitesolutions.com/          → vanilla');

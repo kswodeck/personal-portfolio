@@ -32,7 +32,7 @@ fetchContent().then(content => {
   app.innerHTML = renderApp(content, 'vanilla');
 
   document.getElementById('theme-toggle')?.addEventListener('click', toggleTheme);
-  initAnimations();
+  initAnimations(content.profile.taglines);
 }).catch((err: Error) => {
   document.getElementById('app')!.innerHTML =
     `<div style="padding:2rem;color:red;">Failed to load portfolio content: ${err.message}</div>`;

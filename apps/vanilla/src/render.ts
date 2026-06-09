@@ -37,10 +37,18 @@ function hero(profile: Content['profile']): string {
   const photo = profile.image
     ? `<img class="hero-photo" src="${esc(profile.image)}" alt="${esc(profile.name)}" width="140" height="140" />`
     : '';
+  const badge = profile.available
+    ? `<div class="available-badge">Open to work</div>`
+    : '';
+  const resumeBtn = profile.resumeUrl
+    ? `<a class="hero-resume-btn" href="${esc(profile.resumeUrl)}" download aria-label="Download resume PDF">⬇ Resume</a>`
+    : '';
+
   return `
     <header class="hero">
       <div class="container">
         <div class="hero-body">
+          ${badge}
           <h1 class="hero-name">${esc(profile.name)}</h1>
           <p class="hero-title">${esc(profile.title)}</p>
           <p class="hero-tagline">${esc(profile.tagline)}</p>
@@ -49,6 +57,7 @@ function hero(profile: Content['profile']): string {
             <a href="mailto:${email}" aria-label="Email ${esc(profile.name)}">✉️ ${email}</a>
             <a href="${linkedin}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">💼 LinkedIn</a>
             <a href="${github}" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">🐙 GitHub</a>
+            ${resumeBtn}
           </div>
         </div>
         ${photo}

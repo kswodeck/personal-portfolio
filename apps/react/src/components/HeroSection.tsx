@@ -5,6 +5,9 @@ export function HeroSection({ profile }: { profile: Profile }) {
     <header className="hero">
       <div className="container">
         <div className="hero-body">
+          {profile.available && (
+            <div className="available-badge">Open to work</div>
+          )}
           <h1 className="hero-name">{profile.name}</h1>
           <p className="hero-title">{profile.title}</p>
           <p className="hero-tagline">{profile.tagline}</p>
@@ -19,7 +22,13 @@ export function HeroSection({ profile }: { profile: Profile }) {
             <a href={profile.links.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">
               🐙 GitHub
             </a>
+            {profile.resumeUrl && (
+              <a className="hero-resume-btn" href={profile.resumeUrl} download aria-label="Download resume PDF">
+                ⬇ Resume
+              </a>
+            )}
           </div>
+
         </div>
         {profile.image && (
           <img className="hero-photo" src={profile.image} alt={profile.name} width={140} height={140} />

@@ -24,7 +24,7 @@ onMounted(async () => {
   try {
     content.value = await fetchContent();
     await nextTick();
-    initAnimations();
+    initAnimations(content.value.profile.taglines);
 
     if (content.value) {
       document.title = content.value.meta.siteTitle;

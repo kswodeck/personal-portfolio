@@ -10,15 +10,24 @@ export interface Meta {
   showPhonePublicly?: boolean;
 }
 
+export interface ProfileStat {
+  value: string;
+  label: string;
+}
+
 export interface Profile {
   name: string;
   title: string;
   tagline: string;
+  taglines?: string[];
   location: string;
   email: string;
   phone?: string;
   links: { linkedin: string; github: string };
   image?: string;
+  available?: boolean;
+  resumeUrl?: string;
+  stats?: ProfileStat[];
 }
 
 export interface Skill {

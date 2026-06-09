@@ -62,7 +62,7 @@ export class App implements OnInit {
         if (metaDesc) metaDesc.content = content.meta.description;
       }
       // setTimeout defers until after Angular's change-detection render cycle
-      setTimeout(() => initAnimations());
+      setTimeout(() => initAnimations(content?.profile.taglines));
     });
   }
 }

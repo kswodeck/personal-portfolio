@@ -22,16 +22,29 @@
   "profile": {
     "name": "Kris Swodeck",
     "title": "Front-End Web Developer / Software Engineer",
-    "tagline": "JavaScript • TypeScript • Vue / Nuxt • QA-driven engineering",
+    "tagline": "JavaScript • TypeScript • Front-End Development & Engineering • Responsive, Accessible Web Apps",
     "location": "Dallas–Fort Worth, TX or Remote",
     "email": "kmswodeck@gmail.com",
     "links": {
       "linkedin": "https://linkedin.com/in/kristoffer-swodeck",
       "github": "https://github.com/kswodeck"
     },
-    "image": "ProfilePic-IMG_20260203_190431.jpg"
+    "image": "ProfilePic.jpg",
+    "available": true,
+    "resumeUrl": "/Kris-Swodeck-Resume.pdf",
+    "taglines": [
+      "7+ years building and testing production web apps",
+      "JavaScript · TypeScript · HTML/CSS",
+      "QA-driven Front-End Engineer"
+    ],
+    "stats": [
+      { "value": "7+", "label": "Years Experience" },
+      { "value": "3", "label": "Companies" },
+      { "value": "4", "label": "Frameworks" },
+      { "value": "100+", "label": "Tools Built" }
+    ]
   },
-  "summary": "Front-End Web Developer / Software Engineer with 7+ years building performant, accessible production web applications across the full software development lifecycle. Specialized in JavaScript, TypeScript, HTML5, CSS3, and the Vue / Nuxt.js ecosystem, with a solid Node.js foundation. My dual background in development and quality engineering (Selenium, Mocha, Chai test automation) means I write reliable, well-tested, maintainable code — but what sets me apart is how I think about the work: business coursework trained me to weigh the user, the customer, and the business impact behind every feature. I don't just build what's specced — I ask whether it solves the right problem. And when something's broken, I have an unquenchable urge to fix it.",
+  "summary": "Front-End Web Developer / Software Engineer with 7+ years building and testing performant, accessible production web applications across the full software development lifecycle. Specialized in JavaScript, TypeScript, HTML5, CSS3, and the Vue / Nuxt.js ecosystem, with a solid Node.js foundation. My dual background in development and quality engineering (Selenium, Mocha, Chai test automation) means I write reliable, well-tested, maintainable code — but what sets me apart is how I think about the work: business coursework trained me to weigh the user, the customer, and the business impact behind every feature. I don't just build what's specced — I ask whether it solves the right problem. And when something's broken, I have an unquenchable urge to fix it.",
   "skills": [
     {
       "category": "Languages",

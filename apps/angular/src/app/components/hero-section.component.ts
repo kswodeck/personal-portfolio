@@ -8,6 +8,9 @@ import type { Profile } from '../types';
     <header class="hero">
       <div class="container">
         <div class="hero-body">
+          @if (profile().available) {
+            <div class="available-badge">Open to work</div>
+          }
           <h1 class="hero-name">{{ profile().name }}</h1>
           <p class="hero-title">{{ profile().title }}</p>
           <p class="hero-tagline">{{ profile().tagline }}</p>
@@ -22,7 +25,13 @@ import type { Profile } from '../types';
             <a [href]="profile().links.github" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">
               🐙 GitHub
             </a>
+            @if (profile().resumeUrl) {
+              <a class="hero-resume-btn" [href]="profile().resumeUrl" download aria-label="Download resume PDF">
+                ⬇ Resume
+              </a>
+            }
           </div>
+
         </div>
         @if (profile().image) {
           <img class="hero-photo" [src]="profile().image" [attr.alt]="profile().name" width="140" height="140" />
