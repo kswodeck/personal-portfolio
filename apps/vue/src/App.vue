@@ -3,6 +3,7 @@
 // any template that reads it — no manual DOM updates needed.
 import { ref, onMounted } from 'vue';
 import type { Content } from './types';
+import { fetchContent } from '../../../shared/fetchContent';
 import TopBar from './components/TopBar.vue';
 import HeroSection from './components/HeroSection.vue';
 import AboutSection from './components/AboutSection.vue';
@@ -20,10 +21,7 @@ const error = ref<string | null>(null);
 // the right place for side effects like data fetching.
 onMounted(async () => {
   try {
-    const url = new URL('content.json', document.baseURI);
-    const res = await fetch(url.href);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    content.value = await res.json();
+    content.value = await fetchContent();
 
     if (content.value) {
       document.title = content.value.meta.siteTitle;

@@ -1,20 +1,15 @@
 import '../../../shared/base.css';
-import type { Content } from './types';
 import { renderApp } from './render';
+import { THEME_KEY, getInitialTheme } from '../../../shared/theme';
+import { fetchContent } from '../../../shared/fetchContent';
 
-// ── Theme persistence ────────────────────────────────────────────────────
-const THEME_KEY = 'portfolio-theme';
-
+// ── Theme ────────────────────────────────────────────────────────────────
+// Vanilla has no reactive layer, so theme is applied imperatively.
+// applyTheme also updates the toggle button emoji — framework-specific detail.
 function applyTheme(theme: 'light' | 'dark') {
   document.documentElement.setAttribute('data-theme', theme);
   const btn = document.getElementById('theme-toggle');
   if (btn) btn.textContent = theme === 'dark' ? '☀️' : '🌙';
-}
-
-function initTheme() {
-  const saved = localStorage.getItem(THEME_KEY) as 'light' | 'dark' | null;
-  const preferred = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  applyTheme(saved ?? preferred);
 }
 
 function toggleTheme() {
@@ -24,19 +19,10 @@ function toggleTheme() {
   applyTheme(next);
 }
 
-// ── Content fetch ────────────────────────────────────────────────────────
-// Resolve relative to the page's base so it works at any depth.
-async function loadContent(): Promise<Content> {
-  const url = new URL('content.json', document.baseURI);
-  const res = await fetch(url.href);
-  if (!res.ok) throw new Error(`Failed to load content.json: ${res.status}`);
-  return res.json() as Promise<Content>;
-}
+applyTheme(getInitialTheme());
 
 // ── Boot ─────────────────────────────────────────────────────────────────
-initTheme();
-
-loadContent().then(content => {
+fetchContent().then(content => {
   document.title = content.meta.siteTitle;
   const metaDesc = document.querySelector<HTMLMetaElement>('meta[name="description"]');
   if (metaDesc) metaDesc.content = content.meta.description;
@@ -45,7 +31,7 @@ loadContent().then(content => {
   app.innerHTML = renderApp(content, content.meta.defaultFramework);
 
   document.getElementById('theme-toggle')?.addEventListener('click', toggleTheme);
-}).catch(err => {
+}).catch((err: Error) => {
   document.getElementById('app')!.innerHTML =
-    `<div style="padding:2rem;color:red;">Failed to load portfolio content: ${(err as Error).message}</div>`;
+    `<div style="padding:2rem;color:red;">Failed to load portfolio content: ${err.message}</div>`;
 });

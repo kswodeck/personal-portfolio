@@ -1,7 +1,7 @@
 #!/usr/bin/env node
-// Builds all four apps in sequence and assembles dist/kswodeck/.
+// Builds all four apps in parallel and assembles dist/kswodeck/.
 // Run from the repo root: node scripts/build-all.mjs
-import { execSync } from 'child_process';
+import { spawn } from 'child_process';
 import { cpSync, mkdirSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
@@ -9,32 +9,39 @@ import { fileURLToPath } from 'url';
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const shared = join(root, 'shared/content.json');
 
-function run(cmd, cwd) {
-  console.log(`\n▶ ${cmd}  (in ${cwd.replace(root, '.')})`);
-  execSync(cmd, { cwd, stdio: 'inherit' });
+// Stream each process's output prefixed with the framework name.
+function run(label, cmd, args, cwd) {
+  return new Promise((resolve, reject) => {
+    const proc = spawn(cmd, args, { cwd, shell: true });
+    const prefix = `[${label}] `;
+    proc.stdout.on('data', d => process.stdout.write(prefix + d));
+    proc.stderr.on('data', d => process.stderr.write(prefix + d));
+    proc.on('close', code =>
+      code === 0 ? resolve() : reject(new Error(`${label} exited with code ${code}`))
+    );
+  });
 }
 
-// 0. Sync shared/content.json into each app's public/ so dev servers and
-//    builds always use the latest content without a manual copy step.
-console.log('\n▶ Syncing shared/content.json → apps/*/public/content.json');
-for (const app of ['vanilla', 'react', 'vue', 'angular']) {
+// 0. Copy shared/content.json into the Vite apps' public/ directories so
+//    the static file is available during their build step. Angular reads
+//    directly from shared/ via its angular.json assets config and is omitted.
+console.log('\n▶ Syncing shared/content.json → apps/{vanilla,react,vue}/public/content.json');
+for (const app of ['vanilla', 'react', 'vue']) {
   cpSync(shared, join(root, `apps/${app}/public/content.json`));
 }
 
-// 1. Vanilla — clears and writes dist/kswodeck/
-run('npm run build', join(root, 'apps/vanilla'));
+// 1. Build all four frameworks in parallel — they write to separate output
+//    directories so there's no conflict.
+console.log('\n▶ Building all frameworks in parallel…\n');
+await Promise.all([
+  run('vanilla', 'npm', ['run', 'build'], join(root, 'apps/vanilla')),
+  run('vue',     'npm', ['run', 'build'], join(root, 'apps/vue')),
+  run('react',   'npm', ['run', 'build'], join(root, 'apps/react')),
+  run('angular', 'npx', ['ng', 'build'],  join(root, 'apps/angular')),
+]);
 
-// 2. Vue — writes dist/kswodeck/vue/
-run('npm run build', join(root, 'apps/vue'));
-
-// 3. React — writes dist/kswodeck/react/
-run('npm run build', join(root, 'apps/react'));
-
-// 4. Angular — writes dist/kswodeck/angular/
-run('npx ng build', join(root, 'apps/angular'));
-
-// 5. Ensure the dist root has content.json (vanilla's public/ copy lands it
-//    there already, but this makes the intent explicit).
+// 2. Ensure the dist root has content.json (vanilla's build lands it there
+//    already, but this makes the intent explicit).
 const distRoot = join(root, 'dist/kswodeck');
 mkdirSync(distRoot, { recursive: true });
 cpSync(shared, join(distRoot, 'content.json'));

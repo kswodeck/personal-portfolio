@@ -5,6 +5,7 @@
 import { useState, useEffect } from 'react';
 import type { Content } from './types';
 import { useTheme } from './hooks/useTheme';
+import { fetchContent } from '../../../shared/fetchContent';
 import { TopBar } from './components/TopBar';
 import { HeroSection } from './components/HeroSection';
 import { AboutSection } from './components/AboutSection';
@@ -23,12 +24,7 @@ function App() {
   // Empty dependency array `[]` means this runs once after the first render —
   // equivalent to Vue's `onMounted`.
   useEffect(() => {
-    const url = new URL('content.json', document.baseURI);
-    fetch(url.href)
-      .then(res => {
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        return res.json() as Promise<Content>;
-      })
+    fetchContent()
       .then(data => {
         setContent(data);
         document.title = data.meta.siteTitle;

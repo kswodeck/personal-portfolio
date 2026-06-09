@@ -4,6 +4,7 @@
 // register it manually in a providers array.
 import { Injectable, signal } from '@angular/core';
 import type { Content } from './types';
+import { fetchContent } from '../../../../shared/fetchContent';
 
 @Injectable({ providedIn: 'root' })
 export class ContentService {
@@ -14,10 +15,7 @@ export class ContentService {
 
   async load(): Promise<void> {
     try {
-      const url = new URL('content.json', document.baseURI);
-      const res = await fetch(url.href);
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      this.content.set(await res.json());
+      this.content.set(await fetchContent());
     } catch (e) {
       this.error.set((e as Error).message);
     }

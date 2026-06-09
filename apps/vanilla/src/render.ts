@@ -34,18 +34,24 @@ function hero(profile: Content['profile']): string {
   const email = esc(profile.email);
   const linkedin = esc(profile.links.linkedin);
   const github = esc(profile.links.github);
+  const photo = profile.image
+    ? `<img class="hero-photo" src="${esc(profile.image)}" alt="${esc(profile.name)}" width="140" height="140" />`
+    : '';
   return `
     <header class="hero">
       <div class="container">
-        <h1 class="hero-name">${esc(profile.name)}</h1>
-        <p class="hero-title">${esc(profile.title)}</p>
-        <p class="hero-tagline">${esc(profile.tagline)}</p>
-        <p class="hero-location">📍 ${esc(profile.location)}</p>
-        <div class="hero-links">
-          <a href="mailto:${email}" aria-label="Email ${esc(profile.name)}">✉️ ${email}</a>
-          <a href="${linkedin}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">💼 LinkedIn</a>
-          <a href="${github}" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">🐙 GitHub</a>
+        <div class="hero-body">
+          <h1 class="hero-name">${esc(profile.name)}</h1>
+          <p class="hero-title">${esc(profile.title)}</p>
+          <p class="hero-tagline">${esc(profile.tagline)}</p>
+          <p class="hero-location">📍 ${esc(profile.location)}</p>
+          <div class="hero-links">
+            <a href="mailto:${email}" aria-label="Email ${esc(profile.name)}">✉️ ${email}</a>
+            <a href="${linkedin}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">💼 LinkedIn</a>
+            <a href="${github}" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">🐙 GitHub</a>
+          </div>
         </div>
+        ${photo}
       </div>
     </header>`;
 }

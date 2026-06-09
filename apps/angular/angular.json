@@ -27,6 +27,11 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "content.json",
+                "input": "../../shared",
+                "output": "."
               }
             ],
             "styles": [

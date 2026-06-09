@@ -8,6 +8,12 @@ apps/angular/node_modules/
 # Build output
 dist/
 
+# Generated content copies — edit shared/content.json only; these are synced at build time
+apps/vanilla/public/content.json
+apps/react/public/content.json
+apps/vue/public/content.json
+apps/angular/public/content.json
+
 # Vite
 apps/vanilla/.vite/
 apps/react/.vite/

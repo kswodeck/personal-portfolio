@@ -1,17 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
+import { type Theme, THEME_KEY, getInitialTheme } from '../../../../shared/theme';
 
 // React's `useState` returns a value + setter pair. Unlike Vue's ref,
 // you call the setter function to trigger a re-render rather than
 // mutating `.value` directly.
-type Theme = 'light' | 'dark';
-const THEME_KEY = 'portfolio-theme';
-
-function getInitialTheme(): Theme {
-  const saved = localStorage.getItem(THEME_KEY) as Theme | null;
-  if (saved) return saved;
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-}
-
 export function useTheme() {
   const [theme, setTheme] = useState<Theme>(getInitialTheme);
 

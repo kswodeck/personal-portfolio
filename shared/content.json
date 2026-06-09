@@ -7,9 +7,9 @@
     "defaultFramework": "vanilla",
     "frameworkLabels": {
       "vanilla": "Vanilla JS/TS",
+      "angular": "Angular",
       "react": "React",
-      "vue": "Vue",
-      "angular": "Angular"
+      "vue": "Vue"
     },
     "routing": "path",
     "frameworkPaths": {
@@ -30,7 +30,8 @@
     "links": {
       "linkedin": "https://linkedin.com/in/kristoffer-swodeck",
       "github": "https://github.com/kswodeck"
-    }
+    },
+    "image": "ProfilePic-IMG_20260203_190431.jpg"
   },
   "summary": "Front-End Web Developer / Software Engineer with 7+ years building and testing production web applications across the full software development lifecycle. Specialized in JavaScript, TypeScript, HTML5, CSS3, and the Vue / Nuxt.js ecosystem, with a solid Node.js foundation. Brings uncommon depth in software quality and test automation (Selenium, Mocha, Chai), applying a QA-driven engineering approach that produces reliable, well-tested, maintainable code. B.S. in Computer Science with a Business Administration minor.",
   "skills": [
