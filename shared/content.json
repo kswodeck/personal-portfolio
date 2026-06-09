@@ -3,7 +3,7 @@
     "siteTitle": "Kris Swodeck – Front-End Web Developer / Software Engineer",
     "description": "Portfolio of Kris Swodeck, a Front-End Web Developer / Software Engineer with 7+ years building and testing production web applications. Specializing in JavaScript, TypeScript, and the Vue / Nuxt ecosystem with deep QA and test-automation experience.",
     "basePath": "/",
-    "frameworks": ["vanilla", "react", "vue", "angular"],
+    "frameworks": ["vanilla", "angular", "react", "vue"],
     "defaultFramework": "vanilla",
     "frameworkLabels": {
       "vanilla": "Vanilla JS/TS",
@@ -14,9 +14,9 @@
     "routing": "path",
     "frameworkPaths": {
       "vanilla": "/",
+      "angular": "/angular/",
       "react": "/react/",
-      "vue": "/vue/",
-      "angular": "/angular/"
+      "vue": "/vue/"
     },
     "showPhonePublicly": false
   },
@@ -33,7 +33,7 @@
     },
     "image": "ProfilePic-IMG_20260203_190431.jpg"
   },
-  "summary": "Front-End Web Developer / Software Engineer with 7+ years building and testing production web applications across the full software development lifecycle. Specialized in JavaScript, TypeScript, HTML5, CSS3, and the Vue / Nuxt.js ecosystem, with a solid Node.js foundation. Brings uncommon depth in software quality and test automation (Selenium, Mocha, Chai), applying a QA-driven engineering approach that produces reliable, well-tested, maintainable code. B.S. in Computer Science with a Business Administration minor.",
+  "summary": "Front-End Web Developer / Software Engineer with 7+ years building performant, accessible production web applications across the full software development lifecycle. Specialized in JavaScript, TypeScript, HTML5, CSS3, and the Vue / Nuxt.js ecosystem, with a solid Node.js foundation. My dual background in development and quality engineering (Selenium, Mocha, Chai test automation) means I write reliable, well-tested, maintainable code — but what sets me apart is how I think about the work: business coursework trained me to weigh the user, the customer, and the business impact behind every feature. I don't just build what's specced — I ask whether it solves the right problem. And when something's broken, I have an unquenchable urge to fix it.",
   "skills": [
     {
       "category": "Languages",
@@ -46,10 +46,8 @@
         "Nuxt.js",
         "Node.js",
         "Express.js",
-        "jQuery",
         "AJAX",
         "JSON/XHTML",
-        "React",
         "SASS"
       ]
     },
@@ -77,10 +75,10 @@
         "Confluence",
         "VS Code",
         "Cursor",
-        "WordPress",
         "Claude Code",
         "GitHub Actions",
-        "GitHub Copilot"
+        "GitHub Copilot",
+        "WordPress"
       ]
     },
     {
@@ -100,7 +98,7 @@
   ],
   "experience": [
     {
-      "company": "MIND Research Institute",
+      "company": "MIND Education",
       "location": "Irvine, CA",
       "roles": [
         {
@@ -109,10 +107,10 @@
           "end": "Jun 2026",
           "bullets": [
             "Built and maintained a customer-facing EdTech platform in Vue, Nuxt.js, and Node.js that enabled PK-12 administrators and educators to monitor and manage students across an internet-based math curriculum.",
-            "Translated product requirements into responsive UI with HTML, CSS, and JavaScript, delivering a consistent experience across devices and screen sizes.",
+            "Translated product requirements into responsive, accessible UI with HTML, CSS, and JavaScript, delivering a consistent experience across devices and screen sizes.",
             "Developed and shipped customer-facing features in Vue and Nuxt.js, improving the usability and overall experience of the platform.",
             "Partnered with QA to triage and resolve defects before release, contributing to stable deployments and a seamless user experience.",
-            "Evaluated and adopted new technologies, integrating improvements into ongoing projects."
+            "Continuously evaluated emerging front-end technologies and industry best practices, integrating improvements to enhance development workflows and platform reliability."
           ]
         },
         {
@@ -157,7 +155,7 @@
           "bullets": [
             "Designed and maintained the company website in WordPress using HTML, CSS, and JavaScript.",
             "Implemented SEO/SEM and social media strategies to grow the company's organic traffic and digital presence.",
-            "Used Google Analytics to report web-traffic trends in a small-business context and applied UX/UI concepts to refine front-end layouts."
+            "Applied UX/UI design principles to improve navigation, accessibility, and visual hierarchy; analyzed web-traffic data in Google Analytics to inform design decisions and measure impact."
           ]
         }
       ]
