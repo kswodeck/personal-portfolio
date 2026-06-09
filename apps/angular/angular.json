@@ -2,7 +2,8 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "cli": {
-    "packageManager": "npm"
+    "packageManager": "npm",
+    "analytics": "9ecf34ad-e8a4-467f-b57e-cbb168a2fbb7"
   },
   "newProjectRoot": "projects",
   "projects": {
@@ -27,11 +28,6 @@
               {
                 "glob": "**/*",
                 "input": "public"
-              },
-              {
-                "glob": "content.json",
-                "input": "../../shared",
-                "output": "."
               }
             ],
             "styles": [

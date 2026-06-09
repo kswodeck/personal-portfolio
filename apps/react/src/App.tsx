@@ -44,7 +44,7 @@ function App() {
     <>
       <TopBar
         meta={content.meta}
-        current={content.meta.defaultFramework}
+        current={'react'}
         theme={theme}
         onToggleTheme={toggleTheme}
       />
@@ -55,7 +55,7 @@ function App() {
         <ExperienceSection experience={content.experience} />
         <ProjectsSection projects={content.projects} />
         <EducationSection education={content.education} />
-        <AboutSiteSection meta={content.meta} current={content.meta.defaultFramework} />
+        <AboutSiteSection meta={content.meta} current={'react'} />
       </main>
       <FooterSection profile={content.profile} />
     </>

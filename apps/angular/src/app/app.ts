@@ -43,7 +43,7 @@ import { FooterSectionComponent } from './components/footer-section.component';
         <app-experience-section [experience]="content.experience" />
         <app-projects-section [projects]="content.projects" />
         <app-education-section [education]="content.education" />
-        <app-about-site-section [meta]="content.meta" [current]="content.meta.defaultFramework" />
+        <app-about-site-section [meta]="content.meta" [current]="'angular'" />
       </main>
       <app-footer-section [profile]="content.profile" />
     }

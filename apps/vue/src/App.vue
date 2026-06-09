@@ -41,7 +41,7 @@ onMounted(async () => {
 
   <!-- v-else-if renders only when content has loaded (non-null) -->
   <div v-else-if="content">
-    <TopBar :meta="content.meta" :current="content.meta.defaultFramework" />
+    <TopBar :meta="content.meta" :current="'vue'" />
     <main id="main-content">
       <HeroSection :profile="content.profile" />
       <AboutSection :summary="content.summary" />
@@ -49,7 +49,7 @@ onMounted(async () => {
       <ExperienceSection :experience="content.experience" />
       <ProjectsSection :projects="content.projects" />
       <EducationSection :education="content.education" />
-      <AboutSiteSection :meta="content.meta" :current="content.meta.defaultFramework" />
+      <AboutSiteSection :meta="content.meta" :current="'vue'" />
     </main>
     <FooterSection :profile="content.profile" />
   </div>

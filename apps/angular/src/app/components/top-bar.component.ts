@@ -12,12 +12,12 @@ import { ThemeService } from '../theme.service';
       <div class="topbar" role="banner">
         <div class="container">
           <span class="topbar-left">
-            Built with: {{ content()!.meta.frameworkLabels[content()!.meta.defaultFramework] }}
+            Built with: {{ content()!.meta.frameworkLabels['angular'] }}
           </span>
           <div style="display:flex;align-items:center;gap:0.75rem;">
             <app-framework-switcher
               [meta]="content()!.meta"
-              [current]="content()!.meta.defaultFramework"
+              [current]="'angular'"
               size="small"
             />
             <button

@@ -12,7 +12,7 @@ export default defineConfig({
       name: 'shared-content',
       configureServer(server) {
         server.watcher.add(sharedContent);
-        server.middlewares.use('/content.json', (_req, res) => {
+        server.middlewares.use('/react/content.json', (_req, res) => {
           res.setHeader('Content-Type', 'application/json');
           res.end(readFileSync(sharedContent, 'utf-8'));
         });

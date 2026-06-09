@@ -8,6 +8,6 @@
     "dev:vanilla": "npm run dev --prefix apps/vanilla",
     "dev:react": "npm run dev --prefix apps/react",
     "dev:vue": "npm run dev --prefix apps/vue",
-    "dev:angular": "npm run start --prefix apps/angular"
+    "dev:angular": "node scripts/sync-content.mjs angular && npm run start --prefix apps/angular"
   }
 }

@@ -28,7 +28,7 @@ fetchContent().then(content => {
   if (metaDesc) metaDesc.content = content.meta.description;
 
   const app = document.getElementById('app')!;
-  app.innerHTML = renderApp(content, content.meta.defaultFramework);
+  app.innerHTML = renderApp(content, 'vanilla');
 
   document.getElementById('theme-toggle')?.addEventListener('click', toggleTheme);
 }).catch((err: Error) => {

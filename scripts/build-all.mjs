@@ -22,11 +22,11 @@ function run(label, cmd, args, cwd) {
   });
 }
 
-// 0. Copy shared/content.json into the Vite apps' public/ directories so
-//    the static file is available during their build step. Angular reads
-//    directly from shared/ via its angular.json assets config and is omitted.
-console.log('\n▶ Syncing shared/content.json → apps/{vanilla,react,vue}/public/content.json');
-for (const app of ['vanilla', 'react', 'vue']) {
+// 0. Copy shared/content.json into every app's public/ so each build picks
+//    up the latest content. (Vite dev servers intercept the request live;
+//    Angular dev server needs the file present in public/.)
+console.log('\n▶ Syncing shared/content.json → apps/*/public/content.json');
+for (const app of ['vanilla', 'react', 'vue', 'angular']) {
   cpSync(shared, join(root, `apps/${app}/public/content.json`));
 }
 
