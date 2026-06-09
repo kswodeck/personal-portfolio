@@ -10,7 +10,7 @@ function setupTopbarScroll(): void {
   const topbar = document.querySelector<HTMLElement>('.topbar');
   if (!topbar) return;
   _topbarReady = true;
-  const update = (): void => topbar.classList.toggle('scrolled', window.scrollY > 10);
+  const update = (): void => { topbar?.classList.toggle('scrolled', window.scrollY > 10); };
   window.addEventListener('scroll', update, { passive: true });
   update();
 }
