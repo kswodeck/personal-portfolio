@@ -7,7 +7,7 @@ export interface Meta {
   frameworkLabels: Record<string, string>;
   routing: string;
   frameworkPaths: Record<string, string>;
-  showPhonePublicly: boolean;
+  showPhonePublicly?: boolean;
 }
 
 export interface Profile {
@@ -16,7 +16,7 @@ export interface Profile {
   tagline: string;
   location: string;
   email: string;
-  phone: string;
+  phone?: string;
   links: { linkedin: string; github: string };
   image?: string;
 }
@@ -53,6 +53,18 @@ export interface Education {
   end: string;
 }
 
+export interface AboutSitePillar {
+  title: string;
+  icon: string;
+  description: string;
+  tags: string[];
+}
+
+export interface AboutSite {
+  intro: string;
+  pillars: AboutSitePillar[];
+}
+
 export interface Content {
   meta: Meta;
   profile: Profile;
@@ -61,4 +73,5 @@ export interface Content {
   experience: Company[];
   projects: Project[];
   education: Education[];
+  aboutSite: AboutSite;
 }

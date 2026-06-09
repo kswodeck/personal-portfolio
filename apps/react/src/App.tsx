@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import type { Content } from './types';
 import { useTheme } from './hooks/useTheme';
 import { fetchContent } from '../../../shared/fetchContent';
+import { initAnimations } from '../../../shared/animations';
 import { TopBar } from './components/TopBar';
 import { HeroSection } from './components/HeroSection';
 import { AboutSection } from './components/AboutSection';
@@ -34,6 +35,11 @@ function App() {
       .catch((e: Error) => setError(e.message));
   }, []);
 
+  // useEffect fires after paint — DOM is ready, safe to observe elements
+  useEffect(() => {
+    if (content) initAnimations();
+  }, [content]);
+
   if (error) {
     return <div style={{ padding: '2rem', color: 'red' }}>Failed to load portfolio content: {error}</div>;
   }
@@ -55,7 +61,7 @@ function App() {
         <ExperienceSection experience={content.experience} />
         <ProjectsSection projects={content.projects} />
         <EducationSection education={content.education} />
-        <AboutSiteSection meta={content.meta} current={'react'} />
+        <AboutSiteSection meta={content.meta} current={'react'} aboutSite={content.aboutSite} />
       </main>
       <FooterSection profile={content.profile} />
     </>

@@ -157,15 +157,24 @@ function education(items: Content['education']): string {
     </section>`;
 }
 
-function aboutSite(meta: Content['meta'], current: string): string {
+function aboutSite(meta: Content['meta'], current: string, site: Content['aboutSite']): string {
+  const pillars = site.pillars.map(p => `
+    <div class="pillar-card">
+      <div class="pillar-icon">${esc(p.icon)}</div>
+      <div class="pillar-title">${esc(p.title)}</div>
+      <p class="pillar-desc">${esc(p.description)}</p>
+      <div class="pillar-tags">
+        ${p.tags.map(t => `<span class="pillar-tag">${esc(t)}</span>`).join('')}
+      </div>
+    </div>`).join('');
   return `
     <section class="section about-site" id="about-site" aria-labelledby="about-site-heading">
       <div class="container">
         <h2 class="section-heading" id="about-site-heading">About This Site</h2>
-        <p class="about-site-intro">
-          This portfolio is built four times — once in each major front-end framework — all reading from
-          a single shared <code>content.json</code>. Each implementation lives at its own URL path and is
-          a fully independent, standalone build. Switch between them below:
+        <p class="about-site-intro">${esc(site.intro)}</p>
+        <div class="build-pillars">${pillars}</div>
+        <p style="font-size:0.875rem;color:var(--text-muted);margin-bottom:0.75rem;">
+          You are currently viewing the <strong>${esc(meta.frameworkLabels[current])}</strong> version. Switch between implementations:
         </p>
         ${switcher(meta, current, 'large')}
       </div>
@@ -199,7 +208,7 @@ export function renderApp(content: Content, currentFramework: string): string {
       ${experience(content.experience)}
       ${projects(content.projects)}
       ${education(content.education)}
-      ${aboutSite(content.meta, currentFramework)}
+      ${aboutSite(content.meta, currentFramework, content.aboutSite)}
     </main>
     ${footer(content.profile)}
   `;

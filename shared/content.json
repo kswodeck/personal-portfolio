@@ -17,8 +17,7 @@
       "angular": "/angular/",
       "react": "/react/",
       "vue": "/vue/"
-    },
-    "showPhonePublicly": false
+    }
   },
   "profile": {
     "name": "Kris Swodeck",
@@ -26,7 +25,6 @@
     "tagline": "JavaScript • TypeScript • Vue / Nuxt • QA-driven engineering",
     "location": "Dallas–Fort Worth, TX or Remote",
     "email": "kmswodeck@gmail.com",
-    "phone": "(909) 631-3783",
     "links": {
       "linkedin": "https://linkedin.com/in/kristoffer-swodeck",
       "github": "https://github.com/kswodeck"
@@ -176,7 +174,7 @@
       "url": "",
       "date": "2026",
       "bullets": [
-        "Single portfolio rendered in four front-end implementations – Vanilla JS/TS, React, Vue, and Angular – each served as its own independently built app at a dedicated URL path (e.g. /kswodeck/angular/).",
+        "Single portfolio rendered in four front-end implementations – Vanilla JS/TS, React, Vue, and Angular – each served as its own independently built app at a dedicated URL on the same subdomain (e.g. kswodeck.swodecksitesolutions.com/angular/).",
         "All four implementations render from a single shared content source, demonstrating cross-framework breadth and a consistent component architecture."
       ]
     },
@@ -210,5 +208,46 @@
       "start": "2016",
       "end": "2018"
     }
-  ]
+  ],
+  "aboutSite": {
+    "intro": "This portfolio is engineered as a live demonstration of cross-framework front-end proficiency. The same content, design, and user experience is delivered through four completely independent apps — each built natively in its own framework, each served at its own URL.",
+    "pillars": [
+      {
+        "title": "Four Frameworks, One Design",
+        "icon": "⚡",
+        "description": "Vanilla JS/TS, Angular, React, and Vue each independently implement the full portfolio — same content, same design, zero shared runtime code. A live proof that the same UI challenge can be solved natively in any major front-end framework.",
+        "tags": ["Vanilla JS/TS", "Angular", "React", "Vue"]
+      },
+      {
+        "title": "Single Source of Truth",
+        "icon": "📄",
+        "description": "All resume content lives in one shared/content.json file. Every framework reads from it at build time and in development — edit once, update everywhere. No duplicated data, no versions drifting apart.",
+        "tags": ["JSON", "Content Architecture", "DRY Principle"]
+      },
+      {
+        "title": "Shared TypeScript Layer",
+        "icon": "🔷",
+        "description": "A central shared/types.ts defines every data interface once. Theme detection and content-fetching utilities are also shared — one implementation imported by all four apps. Each framework re-exports what it needs without duplicating logic.",
+        "tags": ["TypeScript", "ES Modules", "Shared Utilities"]
+      },
+      {
+        "title": "Parallel Build Pipeline",
+        "icon": "🏗️",
+        "description": "A custom Node.js build script spawns all four framework builds simultaneously using parallel child processes, then assembles a single deployable dist/ folder — faster than any sequential approach.",
+        "tags": ["Node.js", "Vite", "Angular CLI", "Parallel Builds"]
+      },
+      {
+        "title": "Live Dev Server Middleware",
+        "icon": "🔄",
+        "description": "Each Vite dev server intercepts content.json requests via a custom plugin and serves the file live from shared/ — content changes reflect instantly in the browser without any manual file-copy step.",
+        "tags": ["Vite Plugin", "Dev Middleware", "Hot Reload"]
+      },
+      {
+        "title": "Automated Static Deployment",
+        "icon": "🚀",
+        "description": "Every push to master triggers a Netlify build: install dependencies, run the parallel build, publish the output. Automatic HTTPS, global CDN, sub-5-minute deploys — no server to manage.",
+        "tags": ["Netlify", "CI/CD", "Static Hosting", "Auto Deploy"]
+      }
+    ]
+  }
 }

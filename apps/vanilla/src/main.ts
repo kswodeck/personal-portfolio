@@ -2,6 +2,7 @@ import '../../../shared/base.css';
 import { renderApp } from './render';
 import { THEME_KEY, getInitialTheme } from '../../../shared/theme';
 import { fetchContent } from '../../../shared/fetchContent';
+import { initAnimations } from '../../../shared/animations';
 
 // ── Theme ────────────────────────────────────────────────────────────────
 // Vanilla has no reactive layer, so theme is applied imperatively.
@@ -31,6 +32,7 @@ fetchContent().then(content => {
   app.innerHTML = renderApp(content, 'vanilla');
 
   document.getElementById('theme-toggle')?.addEventListener('click', toggleTheme);
+  initAnimations();
 }).catch((err: Error) => {
   document.getElementById('app')!.innerHTML =
     `<div style="padding:2rem;color:red;">Failed to load portfolio content: ${err.message}</div>`;

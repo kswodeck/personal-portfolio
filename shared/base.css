@@ -23,6 +23,9 @@
 
   --max-w: 860px;
   --section-gap: 4rem;
+
+  /* Translucent background for scrolled topbar glass effect */
+  --bg-glass: rgba(255, 255, 255, 0.88);
 }
 
 [data-theme="dark"] {
@@ -35,6 +38,32 @@
   --accent:        #3b82f6;
   --accent-hover:  #60a5fa;
   --accent-light:  #1e3a5f;
+
+  --bg-glass: rgba(15, 23, 42, 0.88);
+}
+
+/* ── Keyframes ─────────────────────────────────────────────────────────── */
+
+/* Hero text entrance — spring easing for a crisp, confident reveal */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Hero background — slow, barely-perceptible gradient drift signals life */
+@keyframes hero-gradient {
+  0%, 100% { background-position: 0% 50%; }
+  50%       { background-position: 100% 50%; }
+}
+
+/* ── Accessibility: respect reduced-motion preference ──────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* ── Reset & base ──────────────────────────────────────────────────────── */
@@ -107,6 +136,16 @@ p:last-child { margin-bottom: 0; }
   background: var(--bg);
   border-bottom: 1px solid var(--border);
   padding: 0.6rem 0;
+  /* Smooth glass transition when user scrolls (JS adds .scrolled) */
+  transition: background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+/* Frosted-glass effect used by Linear, Vercel, and other tier-1 products */
+.topbar.scrolled {
+  background: var(--bg-glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+  border-bottom-color: transparent;
 }
 .topbar .container {
   display: flex;
@@ -136,7 +175,7 @@ p:last-child { margin-bottom: 0; }
   font-size: 0.8rem;
   font-weight: 500;
   border: 1px solid var(--border);
-  transition: background 0.15s, color 0.15s;
+  transition: background 0.15s, color 0.15s, transform 0.15s, box-shadow 0.15s;
   white-space: nowrap;
 }
 .fw-switcher a {
@@ -147,6 +186,8 @@ p:last-child { margin-bottom: 0; }
   background: var(--surface);
   color: var(--text);
   text-decoration: none;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(37, 99, 235, 0.15);
 }
 .fw-switcher [aria-current="page"] {
   background: var(--accent);
@@ -165,18 +206,32 @@ p:last-child { margin-bottom: 0; }
   padding: 0.3rem 0.6rem;
   font-size: 1rem;
   line-height: 1;
-  transition: background 0.15s;
+  /* Spring curve gives the rotation a satisfying snap */
+  transition: background 0.15s, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-.theme-toggle:hover { background: var(--border); }
+.theme-toggle:hover {
+  background: var(--border);
+  transform: rotate(18deg);
+}
+.theme-toggle:active {
+  transform: rotate(35deg) scale(0.88);
+}
 .theme-toggle:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
 
 /* ── Hero / Header ─────────────────────────────────────────────────────── */
+/*
+  Animated gradient background: four stops cycling slowly (18s) over 400%
+  width creates a living, breathing quality without distracting from content.
+  Uses only existing palette tokens so both light + dark modes look correct.
+*/
 .hero {
   padding: 4rem 0 3rem;
-  background: var(--bg-alt);
+  background: linear-gradient(-45deg, var(--bg-alt), var(--bg), var(--accent-light), var(--bg-alt));
+  background-size: 400% 400%;
+  animation: hero-gradient 18s ease infinite;
   border-bottom: 1px solid var(--border);
 }
 .hero .container {
@@ -185,6 +240,7 @@ p:last-child { margin-bottom: 0; }
   gap: 2rem;
 }
 .hero-body { flex: 1; min-width: 0; }
+
 .hero-photo {
   width: 140px;
   height: 140px;
@@ -194,38 +250,88 @@ p:last-child { margin-bottom: 0; }
   border: 3px solid var(--border);
   box-shadow: var(--shadow-md);
   flex-shrink: 0;
+  animation: fade-up 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+  /* Spring overshoot on scale gives a tactile pop */
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.3s ease,
+              border-color 0.3s ease;
 }
+.hero-photo:hover {
+  transform: scale(1.06);
+  border-color: var(--accent);
+  /* Double shadow: color ring + elevation — creates a glowing halo */
+  box-shadow: 0 0 0 5px var(--accent-light), 0 8px 28px rgba(37, 99, 235, 0.2);
+}
+
+/*
+  Gradient text on the name: transitions from --text (matches body) into --accent.
+  Subtle in light mode (dark→blue), vivid in dark mode (white→blue). Neither
+  mode feels gimmicky because the gradient starts with the expected text color.
+*/
 .hero-name {
-  color: var(--text);
+  background: linear-gradient(120deg, var(--text) 35%, var(--accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
   margin-bottom: 0.25rem;
+  animation: fade-up 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0s both;
 }
+/* Staggered delays give each line its own moment without feeling slow */
 .hero-title {
   font-size: 1.25rem;
   font-weight: 600;
   color: var(--accent);
   margin-bottom: 0.5rem;
+  animation: fade-up 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.09s both;
 }
 .hero-tagline {
   font-size: 1rem;
   color: var(--text-muted);
   margin-bottom: 0.25rem;
+  animation: fade-up 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.17s both;
 }
 .hero-location {
   font-size: 0.9rem;
   color: var(--text-muted);
   margin-bottom: 1.25rem;
+  animation: fade-up 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.23s both;
 }
 .hero-links {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
+  animation: fade-up 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.31s both;
 }
+/* Animated underline draws in from right→left on hover — more intentional
+   than a static underline appearing instantly */
 .hero-links a {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
   font-size: 0.9rem;
   font-weight: 500;
+  position: relative;
+  transition: color 0.15s, transform 0.2s ease;
+}
+.hero-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.25s ease;
+}
+.hero-links a:hover {
+  transform: translateY(-1px);
+  text-decoration: none;
+}
+.hero-links a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
 }
 
 /* ── Sections ──────────────────────────────────────────────────────────── */
@@ -235,13 +341,36 @@ p:last-child { margin-bottom: 0; }
 }
 .section:last-of-type { border-bottom: none; }
 
+/*
+  Section headings get a short accent bar (::after) that grows from 0 width
+  when the heading scrolls into view (.is-visible added by JS).
+  0.2s delay lets the text fade-up complete first, so both motions read clearly.
+*/
 .section-heading {
+  position: relative;
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--accent);
   margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+}
+.section-heading::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 2.5rem;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 1px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+}
+.section-heading.is-visible::after {
+  transform: scaleX(1);
 }
 
 /* ── Skills grid ────────────────────────────────────────────────────────── */
@@ -255,6 +384,14 @@ p:last-child { margin-bottom: 0; }
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 1rem 1.1rem;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.2s ease,
+              border-color 0.2s ease;
+}
+.skill-category:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.1);
+  border-color: var(--accent);
 }
 .skill-category-name {
   font-size: 0.8rem;
@@ -269,6 +406,8 @@ p:last-child { margin-bottom: 0; }
   flex-wrap: wrap;
   gap: 0.35rem;
 }
+/* Tags fill with accent color on hover — turns a passive list into an
+   interactive surface that invites exploration */
 .skill-tag {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -276,6 +415,14 @@ p:last-child { margin-bottom: 0; }
   padding: 0.2rem 0.6rem;
   font-size: 0.78rem;
   color: var(--text);
+  cursor: default;
+  transition: background 0.15s, color 0.15s, border-color 0.15s, transform 0.15s;
+}
+.skill-tag:hover {
+  background: var(--accent-light);
+  color: var(--accent);
+  border-color: var(--accent);
+  transform: translateY(-1px);
 }
 
 /* ── Experience ─────────────────────────────────────────────────────────── */
@@ -303,10 +450,18 @@ p:last-child { margin-bottom: 0; }
   color: var(--text-muted);
 }
 
+/* Role left border animates from subtle to full accent + slight right-shift.
+   Reinforces the "this is interactive" signal and guides the eye. */
 .role {
   margin-bottom: 1.25rem;
   padding-left: 1rem;
   border-left: 3px solid var(--accent-light);
+  transition: border-left-color 0.2s ease,
+              transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.role:hover {
+  border-left-color: var(--accent);
+  transform: translateX(3px);
 }
 .role-header {
   display: flex;
@@ -350,10 +505,13 @@ p:last-child { margin-bottom: 0; }
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  transition: box-shadow 0.15s, border-color 0.15s;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.2s ease,
+              border-color 0.2s ease;
 }
 .project-card:hover {
-  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(37, 99, 235, 0.12);
   border-color: var(--accent);
 }
 .project-card-header {
@@ -402,6 +560,14 @@ p:last-child { margin-bottom: 0; }
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 0.25rem;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.2s ease,
+              border-color 0.2s ease;
+}
+.education-item:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--accent);
 }
 .education-institution {
   font-weight: 700;
@@ -425,8 +591,62 @@ p:last-child { margin-bottom: 0; }
 .about-site-intro {
   font-size: 0.95rem;
   color: var(--text-muted);
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
   max-width: 640px;
+}
+.build-pillars {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
+}
+.pillar-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.2s ease,
+              border-color 0.2s ease;
+}
+.pillar-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(37, 99, 235, 0.12);
+  border-color: var(--accent);
+}
+.pillar-icon {
+  font-size: 1.4rem;
+  line-height: 1;
+}
+.pillar-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text);
+}
+.pillar-desc {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  flex: 1;
+  margin: 0;
+}
+.pillar-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.25rem;
+}
+.pillar-tag {
+  background: var(--accent-light);
+  color: var(--accent);
+  border-radius: 999px;
+  padding: 0.15rem 0.55rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
 }
 .fw-switcher-large {
   display: flex;
@@ -440,7 +660,9 @@ p:last-child { margin-bottom: 0; }
   font-size: 0.9rem;
   font-weight: 600;
   border: 2px solid var(--border);
-  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  transition: background 0.2s, color 0.2s, border-color 0.2s,
+              transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.2s ease;
   white-space: nowrap;
 }
 .fw-switcher-large a {
@@ -451,6 +673,8 @@ p:last-child { margin-bottom: 0; }
   border-color: var(--accent);
   color: var(--accent);
   text-decoration: none;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.18);
 }
 .fw-switcher-large [aria-current="page"] {
   background: var(--accent);
@@ -485,12 +709,34 @@ footer {
   font-weight: 500;
 }
 
+/* ── Scroll reveal ──────────────────────────────────────────────────────── */
+/*
+  JS (shared/animations.ts) adds .reveal to targeted elements on load.
+  IntersectionObserver then adds .is-visible when each enters the viewport.
+  .reveal--stagger children use --reveal-i to offset their delays, creating
+  a cascade effect within grids without any JS timing logic.
+*/
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+.reveal--stagger {
+  transition-delay: calc(var(--reveal-i, 0) * 0.07s);
+}
+
 /* ── Responsive ─────────────────────────────────────────────────────────── */
 @media (max-width: 640px) {
   .hero .container { flex-direction: column; align-items: flex-start; }
   .hero-photo { width: 96px; height: 96px; }
   .skills-grid { grid-template-columns: 1fr; }
   .projects-grid { grid-template-columns: 1fr; }
+  .build-pillars { grid-template-columns: 1fr; }
   .company-header,
   .role-header { flex-direction: column; }
   .footer-inner { flex-direction: column; align-items: flex-start; }

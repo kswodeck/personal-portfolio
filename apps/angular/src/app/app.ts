@@ -3,6 +3,7 @@
 // place to trigger data fetching (same role as React's useEffect([]) or
 // Vue's onMounted).
 import { Component, OnInit, inject } from '@angular/core';
+import { initAnimations } from '../../../../shared/animations';
 import { ContentService } from './content.service';
 import { TopBarComponent } from './components/top-bar.component';
 import { HeroSectionComponent } from './components/hero-section.component';
@@ -43,7 +44,7 @@ import { FooterSectionComponent } from './components/footer-section.component';
         <app-experience-section [experience]="content.experience" />
         <app-projects-section [projects]="content.projects" />
         <app-education-section [education]="content.education" />
-        <app-about-site-section [meta]="content.meta" [current]="'angular'" />
+        <app-about-site-section [meta]="content.meta" [current]="'angular'" [aboutSite]="content.aboutSite" />
       </main>
       <app-footer-section [profile]="content.profile" />
     }
@@ -60,6 +61,8 @@ export class App implements OnInit {
         const metaDesc = document.querySelector<HTMLMetaElement>('meta[name="description"]');
         if (metaDesc) metaDesc.content = content.meta.description;
       }
+      // setTimeout defers until after Angular's change-detection render cycle
+      setTimeout(() => initAnimations());
     });
   }
 }

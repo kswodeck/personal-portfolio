@@ -8,7 +8,7 @@ standalone build served at its own URL path on the subdomain `kswodeck.swodecksi
 |-----|-----------|------------|
 | `kswodeck.swodecksitesolutions.com/` | Vanilla JS/TS | Vite |
 | `kswodeck.swodecksitesolutions.com/react/` | React | Vite |
-| `kswodeck.swodecksitesolutions.com/vue/` | Vue 3 | Vite |
+| `kswodeck.swodecksitesolutions.com/vue/` | Vue | Vite |
 | `kswodeck.swodecksitesolutions.com/angular/` | Angular 17+ | Angular CLI |
 
 ---
@@ -20,7 +20,7 @@ personal-portfolio/
 ├── apps/
 │   ├── vanilla/     Vite + TypeScript
 │   ├── react/       Vite + React + TypeScript
-│   ├── vue/         Vite + Vue 3 + TypeScript
+│   ├── vue/         Vite + Vue + TypeScript
 │   └── angular/     Angular 17+ standalone components
 ├── shared/
 │   ├── content.json   ← single source of truth for all content

@@ -1,9 +1,10 @@
 <script setup lang="ts">
 // `ref` holds reactive state. When `content.value` is set, Vue re-renders
 // any template that reads it — no manual DOM updates needed.
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, nextTick } from 'vue';
 import type { Content } from './types';
 import { fetchContent } from '../../../shared/fetchContent';
+import { initAnimations } from '../../../shared/animations';
 import TopBar from './components/TopBar.vue';
 import HeroSection from './components/HeroSection.vue';
 import AboutSection from './components/AboutSection.vue';
@@ -22,6 +23,8 @@ const error = ref<string | null>(null);
 onMounted(async () => {
   try {
     content.value = await fetchContent();
+    await nextTick();
+    initAnimations();
 
     if (content.value) {
       document.title = content.value.meta.siteTitle;
@@ -49,7 +52,7 @@ onMounted(async () => {
       <ExperienceSection :experience="content.experience" />
       <ProjectsSection :projects="content.projects" />
       <EducationSection :education="content.education" />
-      <AboutSiteSection :meta="content.meta" :current="'vue'" />
+      <AboutSiteSection :meta="content.meta" :current="'vue'" :aboutSite="content.aboutSite" />
     </main>
     <FooterSection :profile="content.profile" />
   </div>
